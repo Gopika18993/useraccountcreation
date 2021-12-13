@@ -24,25 +24,6 @@ class UserDetails implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $username;
 
-      /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     */
-    private $emailid;
-
-      /**
-     * @ORM\Column(type="string", length=180)
-     */
-    private $firstName;
-      /**
-     * @ORM\Column(type="string", length=180)
-     */
-    private $lastName;
-
-      /**
-     * @ORM\Column(type="string", length=11, unique=true)
-     */
-    private $mobileNo;
-
     /**
      * @ORM\Column(type="json")
      */
@@ -53,6 +34,26 @@ class UserDetails implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $firstName;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $lastName;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $emailid;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $mobileno;
 
  
 
@@ -126,27 +127,53 @@ class UserDetails implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getMobile(): ?string
+    public function getFirstName(): ?string
     {
-        return $this->mobile;
+        return $this->firstName;
     }
 
-    public function setMobile(string $mobile): self
+    public function setFirstName(string $firstName): self
     {
-        $this->mobile = $mobile;
+        $this->firstName = $firstName;
 
         return $this;
     }
 
-    public function getNo(): ?string
+    public function getLastName(): ?string
     {
-        return $this->no;
+        return $this->lastName;
     }
 
-    public function setNo(string $no): self
+    public function setLastName(?string $lastName): self
     {
-        $this->no = $no;
+        $this->lastName = $lastName;
 
         return $this;
     }
+
+    public function getEmailid(): ?string
+    {
+        return $this->emailid;
+    }
+
+    public function setEmailid(string $emailid): self
+    {
+        $this->emailid = $emailid;
+
+        return $this;
+    }
+
+    public function getMobileno(): ?int
+    {
+        return $this->mobileno;
+    }
+
+    public function setMobileno(int $mobileno): self
+    {
+        $this->mobileno = $mobileno;
+
+        return $this;
+    }
+
+    
 }
