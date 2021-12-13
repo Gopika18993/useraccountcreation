@@ -3,9 +3,14 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller; 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\UserDetails;
+use App\Form\RegistrationFormType;
 class LoginController extends AbstractController
 {
     #[Route('/login', name: 'login')]
@@ -20,12 +25,5 @@ class LoginController extends AbstractController
                       ]);
     }
 
-    #[Route('/login/message', name: 'login_message')]
-    public function message(): Response
-    {
-         $this->addFlash('success', 'Logged In Successfully');
-
-        return $this->render('login/view.html.twig', ['message'=>"Logged In Successfully"
-         ]);
-    }
+ 
 }

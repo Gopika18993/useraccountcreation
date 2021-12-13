@@ -40,4 +40,44 @@ class RegistrationController extends AbstractController
             'registrationForm' => $form->createView(),
         ]);
     }
+
+
+    #[Route('/login/message', name: 'login_message')]
+    public function message(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    {
+        $user = new UserDetails();
+        $username=$request->request->get('username');
+            $password=$request->request->get('password');
+          
+
+            $user=$entityManager->getRepository('App:UserDetails')->findOneBy(['username'=>$username]);
+            // dump($pwd); die;
+            if($user)
+            {
+                return $this->render('login/view.html.twig');
+            }
+            else
+            {
+        return $this->render('login/error.html.twig');
+            }
+           // $em =  $this->getDoctrine()->getManager();
+           // $user=$entityManager->getRepository('App:UserDetails')->findOneBy(['username'=>$username,'password'=>$password]);
+           // dump($user); die;
+
+      
+    }
+
+    // #[Route('/login/message', name: 'login_message')]
+    // public function message(Request $request): Response
+    // {
+    //     $username=$request->request->get('username');
+    //     $password=$request->request->get('password');
+    //     $em =  $this->getDoctrine()->getManager();
+    //     $user=$em->getRepository('App:UserDetails')->findOneBy(['username'=>$username,'password'=>$password]);
+    //     dump($user); die;
+    //      $this->addFlash('success', 'Logged In Successfully');
+
+    //     return $this->render('login/view.html.twig', ['message'=>"Logged In Successfully"
+    //      ]);
+    // }
 }
