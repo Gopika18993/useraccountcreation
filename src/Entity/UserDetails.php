@@ -4,11 +4,13 @@ namespace App\Entity;
 
 use App\Repository\UserDetailsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserDetailsRepository::class)
+ * @UniqueEntity(fields={"username"}, message="There is already an account with this username")
  */
 class UserDetails implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -51,9 +53,14 @@ class UserDetails implements UserInterface, PasswordAuthenticatedUserInterface
     private $emailid;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $mobileno;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVerified = false;
 
  
 
@@ -171,6 +178,18 @@ class UserDetails implements UserInterface, PasswordAuthenticatedUserInterface
     public function setMobileno(int $mobileno): self
     {
         $this->mobileno = $mobileno;
+
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
 
         return $this;
     }
